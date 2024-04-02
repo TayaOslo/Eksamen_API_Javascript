@@ -75,7 +75,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     const typeElement = document.createElement("p");
-    typeElement.textContent = `Type: ${type}`;
+    typeElement.textContent = `Type: ${type.toUpperCase()}`;
+    typeElement.style.color = "white";
 
     const saveButton = document.createElement("input");
     saveButton.type = "button";

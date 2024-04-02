@@ -1,8 +1,8 @@
 h1 {
   text-align: center;
-  font-size: 2.5em; /* Set the font size */
-  margin-bottom: 20px; /* Add some bottom margin */
-  color: #333; /* Set the text color */
+  font-size: 2.5em; 
+  margin-bottom: 20px; 
+  color: #333; 
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -23,27 +23,27 @@ h1 {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Style for Pokémon name */
+
 .pokemon h2 {
   margin-top: 0;
   font-size: 1.5em;
   text-transform: capitalize;
 }
 
-/* Style for Pokémon number */
+
 .pokemon p {
   font-size: 1.2em;
   color: #666;
 }
 
-/* Style for Pokémon image */
+
 .pokemon img {
   width: 150px;
   height: 150px;
   margin-bottom: 10px;
 }
 
-/* Style for Pokémon buttons */
+
 .pokemon button {
   padding: 5px 10px;
   margin: 5px;
@@ -81,6 +81,6 @@ h1 {
 #save-btn:hover,
 #delete-btn:hover,
 #edit-btn:hover {
-  font-size: 1.2em; /* Increase font size on hover */
-  cursor: pointer; /* Change cursor to pointer on hover */
+  font-size: 1.2em; 
+  cursor: pointer; 
 }
