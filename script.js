@@ -27,9 +27,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
 
+  let pokemonCounter = 1;
+
   function showPokemon(pokemon) {
     const pokemonCard = document.createElement("div");
     pokemonCard.classList.add("pokemon");
+
+    const numberElement = document.createElement("p");
+    numberElement.textContent = `Nr.${pokemonCounter}`;
+    pokemonCounter++;
 
     const imageElement = document.createElement("img");
     imageElement.src = pokemon.sprites.front_default;
@@ -42,10 +48,28 @@ document.addEventListener("DOMContentLoaded", async function () {
     const typeElement = document.createElement("p");
     typeElement.textContent = `Type: ${type}`;
 
+    const saveButton = document.createElement("input");
+    saveButton.type = "button";
+    saveButton.value = "Save";
+    saveButton.id = "save-btn";
 
+    const deleteButton = document.createElement("input");
+    deleteButton.type = "button";
+    deleteButton.value = "Delete";
+    deleteButton.id = "delete-btn";
+
+    const editButton = document.createElement("input");
+    editButton.type = "button";
+    editButton.value = "Edit";
+    editButton.id = "edit-btn";
+
+    pokemonCard.appendChild(numberElement);
     pokemonCard.appendChild(imageElement);
     pokemonCard.appendChild(nameElement);
     pokemonCard.appendChild(typeElement);
+    pokemonCard.appendChild(saveButton);
+    pokemonCard.appendChild(deleteButton);
+    pokemonCard.appendChild(editButton);
 
     pokemonContainer.appendChild(pokemonCard);
   }
