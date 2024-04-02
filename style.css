@@ -1,0 +1,86 @@
+h1 {
+  text-align: center;
+  font-size: 2.5em; /* Set the font size */
+  margin-bottom: 20px; /* Add some bottom margin */
+  color: #333; /* Set the text color */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.pokemon-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pokemon {
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px;
+  width: 200px;
+  text-align: center;
+  background-color: #f2f2f2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Style for Pokémon name */
+.pokemon h2 {
+  margin-top: 0;
+  font-size: 1.5em;
+  text-transform: capitalize;
+}
+
+/* Style for Pokémon number */
+.pokemon p {
+  font-size: 1.2em;
+  color: #666;
+}
+
+/* Style for Pokémon image */
+.pokemon img {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 10px;
+}
+
+/* Style for Pokémon buttons */
+.pokemon button {
+  padding: 5px 10px;
+  margin: 5px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#save-btn {
+  background-color: #a6e3a8;
+  cursor: pointer;
+  transition: font-size 0.3s;
+  border-radius: 0.3s;
+  border-radius: 20px;
+}
+
+#delete-btn {
+  background-color: #f75d52;
+  cursor: pointer;
+  transition: font-size 0.3s;
+  border-radius: 0.3s;
+  border-radius: 20px;
+}
+
+#edit-btn {
+  background-color: #9dbcc7;
+  cursor: pointer;
+  transition: font-size 0.3s;
+  border-radius: 0.3s;
+  border-radius: 20px;
+}
+
+#save-btn:hover,
+#delete-btn:hover,
+#edit-btn:hover {
+  font-size: 1.2em; /* Increase font size on hover */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
