@@ -39,6 +39,7 @@ h1 {
   margin-bottom: 10px;
 }
 
+
 .pokemon button {
   padding: 5px 10px;
   margin: 5px;
@@ -79,3 +80,21 @@ h1 {
   cursor: pointer; 
 }
 
+.type-buttons-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.type-buttons-container button {
+  margin: 0 5px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.type-buttons-container button:hover {
+  background-color: #ccc;
+}
