@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", async function () {
   const pokemonContainer = document.querySelector(".pokemon-container");
-  const typeButtonsContainer = document.querySelector(".type-buttons-container");
+  const typeButtonsContainer = document.querySelector(
+    ".type-buttons-container"
+  );
   const typeColors = {
     normal: "#A8A77A",
     fire: "#EE8130",
@@ -26,9 +28,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   let filteredPokemonList = []; // Store filtered Pokemon data
 
   async function fetchPokemonList() {
-    const response = await fetch(
-      "https://pokeapi.co/api/v2/pokemon/?limit=50"
-    );
+    const response = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=50");
     const data = await response.json();
     return data.results;
   }
@@ -82,7 +82,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     typeNames.forEach((typeName) => {
       const typeButton = document.createElement("button");
       typeButton.classList.add("type-btn");
-      typeButton.textContent = typeName.charAt(0).toUpperCase() + typeName.slice(1);
+      typeButton.textContent =
+        typeName.charAt(0).toUpperCase() + typeName.slice(1);
       typeButton.style.backgroundColor = getTypeColor(typeName);
       typeButton.addEventListener("click", () => {
         filterPokemonByType(typeName);
@@ -144,8 +145,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (type === "all") {
       showAllPokemon(allPokemonList);
     } else {
-      const filteredPokemon = allPokemonList.filter((pokemon) =>
-      pokemon.types[0].type.name === type
+      const filteredPokemon = allPokemonList.filter(
+        (pokemon) => pokemon.types[0].type.name === type
       );
       showAllPokemon(filteredPokemon);
     }
@@ -153,4 +154,3 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   fetchAndShowPokemon();
 });
-
