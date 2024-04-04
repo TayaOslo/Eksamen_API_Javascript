@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", async function () {
   const pokemonContainer = document.querySelector(".pokemon-container");
-  const typeButtonsContainer = document.querySelector(
-    ".type-buttons-container"
-  );
+  const typeButtonsContainer = document.querySelector(".type-buttons-container");
   const typeColors = {
     normal: "#A8A77A",
     fire: "#EE8130",
@@ -24,11 +22,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     fairy: "#D685AD",
   };
 
-  let allPokemonList = [];
-  let filteredPokemonList = [];
+  let allPokemonList = []; // Store all fetched Pokemon data
+  let filteredPokemonList = []; // Store filtered Pokemon data
 
   async function fetchPokemonList() {
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=50");
+    const response = await fetch(
+      "https://pokeapi.co/api/v2/pokemon/?limit=50"
+    );
     const data = await response.json();
     return data.results;
   }
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   function showAllPokemon(pokemonList) {
-    pokemonContainer.innerHTML = "";
+    pokemonContainer.innerHTML = ""; // Clear existing Pokemon
     pokemonList.forEach((pokemon) => {
       showPokemon(pokemon);
     });
@@ -72,17 +72,25 @@ document.addEventListener("DOMContentLoaded", async function () {
     const nameElement = document.createElement("h2");
     nameElement.textContent = `Name: ${pokemon.name}`;
 
-    const firstType = pokemon.types[0].type.name;
-    const backgroundColor = getTypeColor(firstType);
+    const typeNames = pokemon.types.map((type) => type.type.name);
+    const backgroundColor = getTypeColor(typeNames[0]);
 
+    // Apply background color based on type
     pokemonCard.style.backgroundColor = backgroundColor;
 
-    const typeButton = document.createElement("button");
-    typeButton.classList.add("type-btn");
-    typeButton.textContent =
-      firstType.charAt(0).toUpperCase() + firstType.slice(1);
-    typeButton.style.backgroundColor = backgroundColor;
+    // Create type buttons for all types
+    typeNames.forEach((typeName) => {
+      const typeButton = document.createElement("button");
+      typeButton.classList.add("type-btn");
+      typeButton.textContent = typeName.charAt(0).toUpperCase() + typeName.slice(1);
+      typeButton.style.backgroundColor = getTypeColor(typeName);
+      typeButton.addEventListener("click", () => {
+        filterPokemonByType(typeName);
+      });
+      pokemonCard.appendChild(typeButton);
+    });
 
+    // Create action buttons
     const actionButtons = document.createElement("div");
     actionButtons.classList.add("action-buttons");
 
@@ -104,36 +112,16 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     pokemonCard.appendChild(imageElement);
     pokemonCard.appendChild(nameElement);
-    pokemonCard.appendChild(typeButton);
-    pokemonCard.appendChild(actionButtons);
+    pokemonCard.appendChild(actionButtons); // Append action buttons to the Pokémon card
 
     pokemonContainer.appendChild(pokemonCard);
   }
 
   function getTypeColor(type) {
-    const typeColors = {
-      normal: "#A8A77A",
-      fire: "#EE8130",
-      water: "#6390F0",
-      electric: "#F7D02C",
-      grass: "#7AC74C",
-      ice: "#96D9D6",
-      fighting: "#C22E28",
-      poison: "#A33EA1",
-      ground: "#E2BF65",
-      flying: "#A98FF3",
-      psychic: "#F95587",
-      bug: "#A6B91A",
-      rock: "#B6A136",
-      ghost: "#735797",
-      dragon: "#6F35FC",
-      dark: "#705746",
-      steel: "#B7B7CE",
-      fairy: "#D685AD",
-    };
-    return typeColors[type] || "#999";
+    return typeColors[type] || "#999"; // Default color if type not found
   }
 
+  // Create buttons for each type
   Object.keys(typeColors).forEach((type) => {
     const button = document.createElement("button");
     button.textContent = type.charAt(0).toUpperCase() + type.slice(1);
@@ -144,6 +132,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     typeButtonsContainer.appendChild(button);
   });
 
+  // Create a button to remove all filters
   const clearFilterButton = document.createElement("button");
   clearFilterButton.textContent = "Clear Filters";
   clearFilterButton.addEventListener("click", () => {
@@ -155,12 +144,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (type === "all") {
       showAllPokemon(allPokemonList);
     } else {
-      filteredPokemonList = allPokemonList.filter(
-        (pokemon) => pokemon.types[0].type.name === type
+      const filteredPokemon = allPokemonList.filter((pokemon) =>
+      pokemon.types[0].type.name === type
       );
-      showAllPokemon(filteredPokemonList);
+      showAllPokemon(filteredPokemon);
     }
   }
 
   fetchAndShowPokemon();
 });
+
