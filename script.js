@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       showAllPokemon(allPokemonList);
     } else {
       const filteredPokemon = allPokemonList.filter((pokemon) =>
-        pokemon.types.some((t) => t.type.name === type)
+      pokemon.types[0].type.name === type
       );
       showAllPokemon(filteredPokemon);
     }
@@ -153,3 +153,4 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   fetchAndShowPokemon();
 });
+
