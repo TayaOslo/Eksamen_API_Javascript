@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (name && type) {
       try {
         const newPokemon = { name, types: [{ type: { name } }] }; // Create a new Pokemon object with user input
-        showPokemonForm(newPokemon); // Display the new Pokemon card with the form image
+        showPokemonForm(newPokemon, type); // Pass the type name to the showPokemonForm function
       } catch (error) {
         console.error("Error creating Pokémon", error);
       }
@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   });
 
-  function showPokemonForm(pokemon) {
+  async function showPokemonForm(pokemon) {
     const pokemonCard = document.createElement("div");
     pokemonCard.classList.add("pokemon");
 
@@ -171,7 +171,52 @@ document.addEventListener("DOMContentLoaded", async function () {
     const nameElement = document.createElement("h2");
     nameElement.textContent = `Name: ${pokemon.name}`;
 
-    const typeNames = pokemon.types.map((type) => type.type.name);
+    try {
+      // Fetch the type details from the API using the typeName entered by the user
+      const typeResponse = await fetch(
+        `https://pokeapi.co/api/v2/type/${typeName}`
+      );
+      if (!typeResponse.ok) {
+        throw new Error("Failed to fetch Pokémon type.");
+      }
+      const typeData = await typeResponse.json();
+      const typeName = typeData.name; // Extract the type name from the response
+
+      // Determine background color based on the type name
+      const backgroundColor = getTypeColor(typeName);
+
+      pokemonCard.style.backgroundColor = backgroundColor;
+
+      // Create and append type button
+      const typeButton = document.createElement("button");
+      typeButton.classList.add("type-btn");
+      typeButton.textContent =
+        typeName.charAt(0).toUpperCase() + typeName.slice(1);
+      typeButton.style.backgroundColor = backgroundColor;
+      typeButton.addEventListener("click", () => {
+        filterPokemonByType(typeName);
+      });
+      pokemonCard.appendChild(typeButton);
+    } catch (error) {
+      console.error("Error fetching Pokémon type:", error);
+      // Handle errors gracefully
+    }
+
+    /* // Create and append type button
+      const typeButton = document.createElement("button");
+      typeButton.textContent =
+        typeData.name.charAt(0).toUpperCase() + typeData.name.slice(1);
+      typeButton.classList.add("type-btn");
+      typeButton.style.backgroundColor = backgroundColor;
+      typeButton.addEventListener("click", () => {
+        // Handle button click event if needed
+      });
+      pokemonCard.appendChild(typeButton);
+    } catch (error) {
+      console.error("Error fetching Pokémon type:", error);
+    }*/
+
+    /* const typeNames = pokemon.types.map((type) => type.type.name);
     const backgroundColor = getTypeColor(typeNames[0]);
 
     // Apply background color based on type
@@ -188,7 +233,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         filterPokemonByType(typeName);
       });
       pokemonCard.appendChild(typeButton);
-    });
+    });*/
 
     // Create action buttons
     const actionButtons = document.createElement("div");
