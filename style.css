@@ -9,7 +9,6 @@ h1 {
 .pokemon-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
 }
 
 .pokemon {
@@ -23,26 +22,22 @@ h1 {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-
 .pokemon h2 {
   margin-top: 0;
   font-size: 1.5em;
   text-transform: capitalize;
 }
 
-
 .pokemon p {
   font-size: 1.2em;
   color: #666;
 }
-
 
 .pokemon img {
   width: 150px;
   height: 150px;
   margin-bottom: 10px;
 }
-
 
 .pokemon button {
   padding: 5px 10px;
@@ -51,10 +46,9 @@ h1 {
   color: white;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
 }
 
-#save-btn {
+.save-btn {
   background-color: #a6e3a8;
   cursor: pointer;
   transition: font-size 0.3s;
@@ -62,7 +56,7 @@ h1 {
   border-radius: 20px;
 }
 
-#delete-btn {
+.delete-btn {
   background-color: #f75d52;
   cursor: pointer;
   transition: font-size 0.3s;
@@ -70,7 +64,7 @@ h1 {
   border-radius: 20px;
 }
 
-#edit-btn {
+.edit-btn {
   background-color: #9dbcc7;
   cursor: pointer;
   transition: font-size 0.3s;
@@ -78,9 +72,10 @@ h1 {
   border-radius: 20px;
 }
 
-#save-btn:hover,
-#delete-btn:hover,
-#edit-btn:hover {
+.save-btn:hover,
+.delete-btn:hover,
+.edit-btn:hover {
   font-size: 1.2em; 
   cursor: pointer; 
 }
+
