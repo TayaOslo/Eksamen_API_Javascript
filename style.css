@@ -98,3 +98,38 @@ h1 {
 .type-buttons-container button:hover {
   background-color: #ccc;
 }
+
+#create-pokemon-form {
+  display: flex;
+  
+  align-items: center;
+  justify-content: center;
+  width: 550px; /* Adjust width as needed */
+  margin:  auto; /* Center horizontally */
+  padding: 10px; /* Add padding for spacing */
+  background-color: #f2f2f2; /* Background color */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+}
+
+#create-pokemon-form input,
+#create-pokemon-form button {
+  margin-bottom: 10px; /* Add spacing between elements */
+}
+
+#create-pokemon-btn {
+  background-color: #4caf50; /* Green */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+#create-pokemon-btn:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+
+
