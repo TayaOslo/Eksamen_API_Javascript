@@ -224,6 +224,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     const saveButton = document.createElement("button");
     saveButton.textContent = "Save";
     saveButton.classList.add("btn", "save-btn");
+    saveButton.addEventListener("click", () => {
+      savePokemon(newPokemon);
+    });
 
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
@@ -285,8 +288,13 @@ document.addEventListener("DOMContentLoaded", async function () {
       savedPokemonCard.classList.add("pokemon");
 
       const imageElement = document.createElement("img");
-      imageElement.src = pokemon.sprites.front_default;
-      imageElement.alt = pokemon.name;
+      if (pokemon.sprites && pokemon.sprites.front_default) {
+        imageElement.src = pokemon.sprites.front_default;
+        imageElement.alt = pokemon.name;
+      } else {
+        imageElement.src = "assets/pokemon.webp"; // Default image source
+        imageElement.alt = "Default Pokemon";
+      }
 
       const nameElement = document.createElement("h2");
       nameElement.textContent = `Name: ${pokemon.name}`;
