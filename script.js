@@ -109,6 +109,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
     deleteButton.classList.add("btn", "delete-btn");
+    deleteButton.addEventListener("click", () => {
+      deletePokemon(pokemon, allPokemonList);
+      pokemonContainer.removeChild(pokemonCard); // Remove the deleted Pokemon card from the container
+    });
 
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";
@@ -166,7 +170,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   });
 
+  let newPokemon; // Define newPokemon at a higher scope
+
   async function showPokemonForm(pokemon, type) {
+    newPokemon = pokemon; // Assign the pokemon to newPokemon
+
     const pokemonCard = document.createElement("div");
     pokemonCard.classList.add("pokemon");
 
@@ -209,6 +217,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     // Create action buttons
+
     const actionButtons = document.createElement("div");
     actionButtons.classList.add("action-buttons");
 
@@ -219,6 +228,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
     deleteButton.classList.add("btn", "delete-btn");
+    deleteButton.addEventListener("click", () => {
+      deletePokemon(newPokemon, allPokemonList);
+      pokemonContainer.removeChild(pokemonCard); // Remove the deleted Pokemon card from the container
+    });
 
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";
@@ -257,6 +270,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
 
+  // Function to delete a Pokemon from the specified list
+  function deletePokemon(pokemon, container) {
+    const index = container.indexOf(pokemon);
+    if (index !== -1) {
+      container.splice(index, 1);
+    }
+  }
+
   function showSavedPokemon() {
     savedPokemonContainer.innerHTML = ""; // Clear existing saved Pokémon display
     savedPokemonList.forEach((pokemon) => {
@@ -277,6 +298,10 @@ document.addEventListener("DOMContentLoaded", async function () {
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
       deleteButton.classList.add("btn", "delete-btn");
+      deleteButton.addEventListener("click", () => {
+        deletePokemon(pokemon, savedPokemonList);
+        savedPokemonContainer.removeChild(savedPokemonCard);
+      });
 
       const editButton = document.createElement("button");
       editButton.textContent = "Edit";
