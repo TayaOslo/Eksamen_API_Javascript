@@ -3,6 +3,10 @@ document.addEventListener("DOMContentLoaded", async function () {
   const typeButtonsContainer = document.querySelector(
     ".type-buttons-container"
   );
+  const savedPokemonContainer = document.querySelector(
+    ".saved-pokemon-container"
+  );
+
   const typeColors = {
     normal: "#A8A77A",
     fire: "#EE8130",
@@ -25,6 +29,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   };
 
   let allPokemonList = []; // Store all fetched Pokemon data
+  let savedPokemonList = []; // Store saved Pokemon
 
   async function fetchPokemonList() {
     const response = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=50");
@@ -97,6 +102,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     const saveButton = document.createElement("button");
     saveButton.textContent = "Save";
     saveButton.classList.add("btn", "save-btn");
+    saveButton.addEventListener("click", () => {
+      savePokemon(pokemon);
+    });
 
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
@@ -115,8 +123,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     pokemonCard.appendChild(actionButtons); // Append action buttons to the Pokémon card
 
     pokemonContainer.appendChild(pokemonCard);
-
-    pokemonContainer.insertBefore(pokemonCard, pokemonContainer.firstChild); // Insert the new card at the beginning of the container
   }
 
   function getTypeColor(type) {
@@ -238,6 +244,53 @@ document.addEventListener("DOMContentLoaded", async function () {
       );
       showAllPokemon(filteredPokemon);
     }
+  }
+
+  function savePokemon(pokemon) {
+    if (savedPokemonList.length < 5) {
+      savedPokemonList.push(pokemon);
+      showSavedPokemon();
+    } else {
+      alert(
+        "You have reached the maximum limit of 5 saved Pokémon. Please delete a saved Pokémon to save more."
+      );
+    }
+  }
+
+  function showSavedPokemon() {
+    savedPokemonContainer.innerHTML = ""; // Clear existing saved Pokémon display
+    savedPokemonList.forEach((pokemon) => {
+      const savedPokemonCard = document.createElement("div");
+      savedPokemonCard.classList.add("pokemon");
+
+      const imageElement = document.createElement("img");
+      imageElement.src = pokemon.sprites.front_default;
+      imageElement.alt = pokemon.name;
+
+      const nameElement = document.createElement("h2");
+      nameElement.textContent = `Name: ${pokemon.name}`;
+
+      // Create action buttons for saved Pokemon
+      const actionButtons = document.createElement("div");
+      actionButtons.classList.add("action-buttons");
+
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "Delete";
+      deleteButton.classList.add("btn", "delete-btn");
+
+      const editButton = document.createElement("button");
+      editButton.textContent = "Edit";
+      editButton.classList.add("btn", "edit-btn");
+
+      actionButtons.appendChild(deleteButton);
+      actionButtons.appendChild(editButton);
+
+      savedPokemonCard.appendChild(imageElement);
+      savedPokemonCard.appendChild(nameElement);
+      savedPokemonCard.appendChild(actionButtons); // Append action buttons to the saved Pokémon card
+
+      savedPokemonContainer.appendChild(savedPokemonCard);
+    });
   }
 
   fetchAndShowPokemon();
