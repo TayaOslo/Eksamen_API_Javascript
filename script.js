@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   });
 
-  async function showPokemonForm(pokemon) {
+  async function showPokemonForm(pokemon, type) {
     const pokemonCard = document.createElement("div");
     pokemonCard.classList.add("pokemon");
 
@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     try {
       // Fetch the type details from the API using the typeName entered by the user
       const typeResponse = await fetch(
-        `https://pokeapi.co/api/v2/type/${typeName}`
+        `https://pokeapi.co/api/v2/type/${type}`
       );
       if (!typeResponse.ok) {
         throw new Error("Failed to fetch Pokémon type.");
@@ -201,39 +201,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       console.error("Error fetching Pokémon type:", error);
       // Handle errors gracefully
     }
-
-    /* // Create and append type button
-      const typeButton = document.createElement("button");
-      typeButton.textContent =
-        typeData.name.charAt(0).toUpperCase() + typeData.name.slice(1);
-      typeButton.classList.add("type-btn");
-      typeButton.style.backgroundColor = backgroundColor;
-      typeButton.addEventListener("click", () => {
-        // Handle button click event if needed
-      });
-      pokemonCard.appendChild(typeButton);
-    } catch (error) {
-      console.error("Error fetching Pokémon type:", error);
-    }*/
-
-    /* const typeNames = pokemon.types.map((type) => type.type.name);
-    const backgroundColor = getTypeColor(typeNames[0]);
-
-    // Apply background color based on type
-    pokemonCard.style.backgroundColor = backgroundColor;
-
-    // Create type buttons for all types
-    typeNames.forEach((typeName) => {
-      const typeButton = document.createElement("button");
-      typeButton.classList.add("type-btn");
-      typeButton.textContent =
-        typeName.charAt(0).toUpperCase() + typeName.slice(1);
-      typeButton.style.backgroundColor = getTypeColor(typeName);
-      typeButton.addEventListener("click", () => {
-        filterPokemonByType(typeName);
-      });
-      pokemonCard.appendChild(typeButton);
-    });*/
 
     // Create action buttons
     const actionButtons = document.createElement("div");
