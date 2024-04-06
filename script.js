@@ -188,6 +188,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     const nameElement = document.createElement("h2");
     nameElement.textContent = `Name: ${pokemon.name}`;
 
+    let typeButton; // Define typeButton variable outside of the event listener
+
     try {
       // Fetch the type details from the API using the typeName entered by the user
       const typeResponse = await fetch(
@@ -205,7 +207,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       pokemonCard.style.backgroundColor = backgroundColor;
 
       // Create and append type button
-      const typeButton = document.createElement("button");
+      typeButton = document.createElement("button"); // Assign typeButton here
       typeButton.classList.add("type-btn");
       typeButton.textContent =
         typeName.charAt(0).toUpperCase() + typeName.slice(1);
@@ -217,6 +219,12 @@ document.addEventListener("DOMContentLoaded", async function () {
     } catch (error) {
       console.error("Error fetching Pokémon type:", error);
       // Handle errors gracefully
+      // If there's an error fetching the type, create a default type button
+      typeButton = document.createElement("button");
+      typeButton.classList.add("type-btn");
+      typeButton.textContent = "Unknown Type";
+      typeButton.style.backgroundColor = "#999"; // Default color
+      pokemonCard.appendChild(typeButton);
     }
 
     // Create action buttons
@@ -245,11 +253,25 @@ document.addEventListener("DOMContentLoaded", async function () {
     editButton.addEventListener("click", () => {
       const newName = prompt(
         "Enter the new name for the Pokémon:",
-        pokemon.name
+        newPokemon.name
       );
       if (newName !== null && newName.trim() !== "") {
-        pokemon.name = newName.trim();
-        nameElement.textContent = `Name: ${pokemon.name}`;
+        newPokemon.name = newName.trim();
+        nameElement.textContent = `Name: ${newPokemon.name}`;
+      }
+
+      const newType = prompt(
+        "Enter the new type for the Pokémon:",
+        newPokemon.types[0].type.name
+      );
+      if (newType !== null && newType.trim() !== "") {
+        const typeName = newType.trim();
+        newPokemon.types[0].type.name = typeName;
+        const backgroundColor = getTypeColor(typeName);
+        pokemonCard.style.backgroundColor = backgroundColor;
+        typeButton.textContent =
+          typeName.charAt(0).toUpperCase() + typeName.slice(1);
+        typeButton.style.backgroundColor = backgroundColor;
       }
     });
 
@@ -294,11 +316,37 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
 
+  let newType; // Declare newType variable outside of the function
+
   function editPokemon(pokemon) {
     const newName = prompt("Enter the new name for the Pokémon:", pokemon.name);
+    newType = prompt(
+      "Enter the new type for the Pokémon:",
+      pokemon.types[0].type.name
+    );
+
     if (newName !== null && newName.trim() !== "") {
       pokemon.name = newName.trim();
+      pokemon.types[0].type.name = newType.trim(); // Update the type of the Pokemon
+
+      // Update the type button in the Pokemon card
+      const typeButton = pokemonContainer.querySelector(".type-btn");
+      typeButton.textContent =
+        newType.charAt(0).toUpperCase() + newType.slice(1);
+
+      // Update the type button in the saved Pokemon card if applicable
+      const savedPokemonCards =
+        savedPokemonContainer.querySelectorAll(".pokemon");
+      savedPokemonCards.forEach((card) => {
+        if (card.textContent.includes(pokemon.name)) {
+          const savedTypeButton = card.querySelector(".type-btn");
+          savedTypeButton.textContent =
+            newType.charAt(0).toUpperCase() + newType.slice(1);
+        }
+      });
+
       showAllPokemon(allPokemonList);
+      showSavedPokemon();
     }
   }
 
