@@ -117,6 +117,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";
     editButton.classList.add("btn", "edit-btn");
+    editButton.addEventListener("click", () => {
+      editPokemon(pokemon);
+    });
 
     actionButtons.appendChild(saveButton);
     actionButtons.appendChild(deleteButton);
@@ -217,7 +220,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     // Create action buttons
-
     const actionButtons = document.createElement("div");
     actionButtons.classList.add("action-buttons");
 
@@ -239,6 +241,17 @@ document.addEventListener("DOMContentLoaded", async function () {
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";
     editButton.classList.add("btn", "edit-btn");
+
+    editButton.addEventListener("click", () => {
+      const newName = prompt(
+        "Enter the new name for the Pokémon:",
+        pokemon.name
+      );
+      if (newName !== null && newName.trim() !== "") {
+        pokemon.name = newName.trim();
+        nameElement.textContent = `Name: ${pokemon.name}`;
+      }
+    });
 
     actionButtons.appendChild(saveButton);
     actionButtons.appendChild(deleteButton);
@@ -281,6 +294,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
 
+  function editPokemon(pokemon) {
+    const newName = prompt("Enter the new name for the Pokémon:", pokemon.name);
+    if (newName !== null && newName.trim() !== "") {
+      pokemon.name = newName.trim();
+      showAllPokemon(allPokemonList);
+    }
+  }
+
   function showSavedPokemon() {
     savedPokemonContainer.innerHTML = ""; // Clear existing saved Pokémon display
     savedPokemonList.forEach((pokemon) => {
@@ -311,12 +332,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         savedPokemonContainer.removeChild(savedPokemonCard);
       });
 
-      const editButton = document.createElement("button");
-      editButton.textContent = "Edit";
-      editButton.classList.add("btn", "edit-btn");
-
       actionButtons.appendChild(deleteButton);
-      actionButtons.appendChild(editButton);
 
       savedPokemonCard.appendChild(imageElement);
       savedPokemonCard.appendChild(nameElement);
