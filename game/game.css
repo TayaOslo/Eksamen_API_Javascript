@@ -1,64 +1,71 @@
 .main-container {
-    border: 1px solid black;
-    width: 100%;
-    height: 100vh;
-    background-image: url(assets/waterfall-pokemon-background.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    overflow: hidden;
+  border: 1px solid black;
+  width: 100%;
+  height: 100vh;
+  background-image: url(assets/waterfall-pokemon-background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
 }
 
 .img-container {
-    position: absolute;
-  }
-  
-  .img-container:hover img {
-    transform: scale(1.1);
-  }
-  
-  .butterfree {
-    bottom: 5%;
-    right: 15%;
-  }
+  position: absolute;
+}
 
-  .squirtle {
-    position: fixed;
-    left: 52%;
-    top: 53%;
-  }
+.img-container:hover img {
+  transform: scale(1.1);
+}
 
-  .charmander {
-    bottom: 6%;
-    left: 35%;
-  }
+.butterfree {
+  bottom: 5%;
+  right: 15%;
+}
 
-  .pokemon {
-    height: 250px;
-  }
-  
-  .dark-container {
-    bottom: 25%;
-    left: 2%;
-  }
-  
-  .dark {
-    height: 450px;
-  }
+.squirtle {
+  position: fixed;
+  left: 52%;
+  top: 53%;
+}
 
-  .hp-table {
-    font-size: 26px; /* Adjust font size as needed */
-    background-color: rgb(222, 145, 226);
-    border-radius: 5%;
-  }
-  
-  .hp {
-    color: rgb(246, 250, 246); /* Color for HP text */
-    background-color: rgb(150, 120, 232);
-    border-radius: 5%;
-  }
-  
-  .hp.low {
-    color: red; /* Color for low HP text */
-  }
-  
-  
+.charmander {
+  bottom: 6%;
+  left: 35%;
+}
+
+.pokemon {
+  height: 250px;
+}
+
+.ally-container {
+  bottom: 30%;
+  left: 25%;
+}
+
+.ally {
+  height: 200px;
+}
+
+.dark-container {
+  bottom: 25%;
+  left: 2%;
+}
+
+.dark {
+  height: 450px;
+}
+
+.hp-table {
+  font-size: 26px; /* Adjust font size as needed */
+  background-color: rgb(222, 145, 226);
+  border-radius: 5%;
+}
+
+.hp {
+  color: rgb(246, 250, 246); /* Color for HP text */
+  background-color: rgb(150, 120, 232);
+  border-radius: 5%;
+}
+
+.hp.low {
+  color: red; /* Color for low HP text */
+}
