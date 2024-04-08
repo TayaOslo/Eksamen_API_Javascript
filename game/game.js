@@ -58,6 +58,54 @@ async function performDefense(defenderName) {
   }
 }
 
+// Function to perform an ally attack
+async function performAllyAttack(attackerName, defenderName) {
+  try {
+    // Fetch data for attacker (ally Pokémon)
+    const attackerResponse = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${attackerName}`
+    );
+    const attackerData = await attackerResponse.json();
+
+    // Fetch data for random defender (one of the three specified classes)
+    const defenderClasses = ["butterfree", "squirtle", "charmander"];
+    const randomDefenderClass =
+      defenderClasses[Math.floor(Math.random() * defenderClasses.length)];
+    const randomDefenderResponse = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${randomDefenderClass}`
+    );
+    const randomDefenderData = await randomDefenderResponse.json();
+
+    // Randomly select an attack for the ally
+    const randomAttack =
+      attackerData.moves[Math.floor(Math.random() * attackerData.moves.length)]
+        .move.name;
+
+    // Apply the attack on the random defender
+    alert(
+      `${attackerName} used ${randomAttack} on ${randomDefenderData.name}!`
+    );
+
+    // Update defender's HP (decrease by 20%)
+    const defenderHP = document.querySelector(
+      `.img-container.${randomDefenderClass} .hp`
+    );
+    let currentHP = parseInt(defenderHP.innerText.replace("%", ""));
+    currentHP = Math.max(currentHP - 20, 0); // Decrease HP by 20%
+    defenderHP.innerText = `${currentHP}%`;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
+
+// Event listener for ally Pokémon attacks
+document.querySelector(".ally-container").addEventListener("click", () => {
+  const attackerName = document
+    .querySelector(".ally")
+    .getAttribute("data-pokemon");
+  performAllyAttack(attackerName);
+});
+
 // Event listener for user's Pokémon attacks
 document
   .querySelectorAll(".img-container:not(.dark-container)")
