@@ -1,0 +1,47 @@
+.main-container {
+    border: 1px solid black;
+    width: 100%;
+    height: 100vh;
+    background-image: url(assets/waterfall-pokemon-background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.img-container {
+    position: absolute;
+  }
+  
+  .img-container:hover img {
+    transform: scale(1.1);
+  }
+  
+  .butterfree {
+    bottom: 5%;
+    right: 15%;
+  }
+
+  .squirtle {
+    position: fixed;
+    left: 52%;
+    top: 53%;
+  }
+
+  .charmander {
+    bottom: 6%;
+    left: 35%;
+  }
+
+  .pokemon {
+    height: 250px;
+  }
+  
+  .dark-container {
+    bottom: 25%;
+    left: 2%;
+  }
+  
+  .dark {
+    height: 450px;
+  }
+  
