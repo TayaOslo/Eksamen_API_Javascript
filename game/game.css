@@ -44,4 +44,21 @@
   .dark {
     height: 450px;
   }
+
+  .hp-table {
+    font-size: 26px; /* Adjust font size as needed */
+    background-color: rgb(222, 145, 226);
+    border-radius: 5%;
+  }
+  
+  .hp {
+    color: rgb(246, 250, 246); /* Color for HP text */
+    background-color: rgb(150, 120, 232);
+    border-radius: 5%;
+  }
+  
+  .hp.low {
+    color: red; /* Color for low HP text */
+  }
+  
   
