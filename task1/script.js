@@ -1,11 +1,7 @@
 document.addEventListener("DOMContentLoaded", async function () {
   const pokemonContainer = document.querySelector(".pokemon-container");
-  const typeButtonsContainer = document.querySelector(
-    ".type-buttons-container"
-  );
-  const savedPokemonContainer = document.querySelector(
-    ".saved-pokemon-container"
-  );
+  const typeButtonsContainer = document.querySelector(".type-buttons-container");
+  const savedPokemonContainer = document.querySelector(".saved-pokemon-container");
 
   const typeColors = {
     normal: "#A8A77A",
@@ -192,9 +188,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     try {
       // Fetch the type details from the API using the typeName entered by the user
-      const typeResponse = await fetch(
-        `https://pokeapi.co/api/v2/type/${type}`
-      );
+      const typeResponse = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
       if (!typeResponse.ok) {
         throw new Error("Failed to fetch Pokémon type.");
       }
@@ -301,6 +295,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (savedPokemonList.length < 5) {
       savedPokemonList.push(pokemon);
       showSavedPokemon();
+      // Save updated savedPokemonList to localStorage
+      localStorage.setItem('savedPokemonList', JSON.stringify(savedPokemonList));
     } else {
       alert(
         "You have reached the maximum limit of 5 saved Pokémon. Please delete a saved Pokémon to save more."
@@ -390,5 +386,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
   }
 
+  // Load saved Pokemon from localStorage on page load
+  function loadSavedPokemonFromLocalStorage() {
+    const savedPokemonData = localStorage.getItem('savedPokemonList');
+    if (savedPokemonData) {
+      savedPokemonList = JSON.parse(savedPokemonData);
+      showSavedPokemon();
+    }
+  }
+
   fetchAndShowPokemon();
+  loadSavedPokemonFromLocalStorage();
 });
