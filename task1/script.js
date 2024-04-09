@@ -301,6 +301,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (savedPokemonList.length < 5) {
       savedPokemonList.push(pokemon);
       showSavedPokemon();
+      // Save updated savedPokemonList to localStorage
+      localStorage.setItem(
+        "savedPokemonList",
+        JSON.stringify(savedPokemonList)
+      );
     } else {
       alert(
         "You have reached the maximum limit of 5 saved Pokémon. Please delete a saved Pokémon to save more."
@@ -313,6 +318,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     const index = container.indexOf(pokemon);
     if (index !== -1) {
       container.splice(index, 1);
+      // Update localStorage
+      localStorage.setItem(
+        "savedPokemonList",
+        JSON.stringify(savedPokemonList)
+      );
     }
   }
 
@@ -390,5 +400,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
   }
 
+  // Load saved Pokemon from localStorage on page load
+  function loadSavedPokemonFromLocalStorage() {
+    const savedPokemonData = localStorage.getItem("savedPokemonList");
+    if (savedPokemonData) {
+      savedPokemonList = JSON.parse(savedPokemonData);
+      showSavedPokemon();
+    }
+  }
+
   fetchAndShowPokemon();
+  loadSavedPokemonFromLocalStorage();
 });
