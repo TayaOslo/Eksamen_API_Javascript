@@ -309,6 +309,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     const index = container.indexOf(pokemon);
     if (index !== -1) {
       container.splice(index, 1);
+       // Update localStorage
+       localStorage.setItem('savedPokemonList', JSON.stringify(savedPokemonList));
     }
   }
 
