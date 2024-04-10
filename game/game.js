@@ -1,6 +1,34 @@
+// Function to check if all three specified Pokémon have 0% HP
+function checkAllPokemonsDefeated() {
+  const butterfreeHP = parseInt(
+    document
+      .querySelector(".img-container.butterfree .hp")
+      .innerText.replace("%", "")
+  );
+  const squirtleHP = parseInt(
+    document
+      .querySelector(".img-container.squirtle .hp")
+      .innerText.replace("%", "")
+  );
+  const charmanderHP = parseInt(
+    document
+      .querySelector(".img-container.charmander .hp")
+      .innerText.replace("%", "")
+  );
+
+  return butterfreeHP === 0 && squirtleHP === 0 && charmanderHP === 0;
+}
+
 // Function to perform an attack
 async function performAttack(attackerName, defenderName) {
   try {
+    // Check if all three Pokémon are defeated
+    if (checkAllPokemonsDefeated()) {
+      alert(
+        "All three Pokémon are defeated. They cannot attack Umbreon!"
+      );
+      return; // Exit the function
+    }
     // Fetch data for attacker (user's Pokémon)
     const attackerResponse = await fetch(
       `https://pokeapi.co/api/v2/pokemon/${attackerName}`
@@ -110,6 +138,13 @@ async function performAllyAttack(attackerName, defenderName) {
     // Check if defender's HP is 0% and display defeat prompt if so
     if (currentHP === 0) {
       alert(`${randomDefenderData.name} was defeated!`);
+    }
+
+    // Check if all three Pokémon are defeated
+    if (checkAllPokemonsDefeated()) {
+      alert(
+        "Pokemons tried to protect their land, but were defeated this time...to be continued!"
+      );
     }
   } catch (error) {
     console.error("Error fetching data:", error);
