@@ -24,9 +24,7 @@ async function performAttack(attackerName, defenderName) {
   try {
     // Check if all three Pokémon are defeated
     if (checkAllPokemonsDefeated()) {
-      alert(
-        "All three Pokémon are defeated. They cannot attack Umbreon!"
-      );
+      alert("All three Pokémon are defeated. They cannot attack Umbreon!");
       return; // Exit the function
     }
     // Fetch data for attacker (user's Pokémon)
@@ -92,7 +90,7 @@ async function performDefense(defenderName) {
 }
 
 // Function to perform an ally attack
-async function performAllyAttack(attackerName, defenderName) {
+async function performAllyAttack(attackerName) {
   try {
     // Fetch data for attacker (ally Pokémon)
     const attackerResponse = await fetch(
