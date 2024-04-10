@@ -25,6 +25,11 @@ async function performAttack(attackerName, defenderName) {
     let currentHP = parseInt(defenderHP.innerText.replace("%", ""));
     currentHP = Math.max(currentHP - 10, 0); // Decrease HP by 10%
     defenderHP.innerText = `${currentHP}%`;
+
+    // Check if defender's HP is 0% and display defeat prompt if so
+    if (currentHP === 0) {
+      alert(`${defenderName} was defeated!`);
+    }
   } catch (error) {
     console.error("Error fetching data:", error);
   }
@@ -76,6 +81,18 @@ async function performAllyAttack(attackerName, defenderName) {
     );
     const randomDefenderData = await randomDefenderResponse.json();
 
+    // Get defender's HP
+    const defenderHP = document.querySelector(
+      `.img-container.${randomDefenderClass} .hp`
+    );
+    let currentHP = parseInt(defenderHP.innerText.replace("%", ""));
+
+    // Check if defender's HP is 0%
+    if (currentHP === 0) {
+      alert(`${randomDefenderData.name} has 0% HP and cannot be attacked!`);
+      return; // Exit the function
+    }
+
     // Randomly select an attack for the ally
     const randomAttack =
       attackerData.moves[Math.floor(Math.random() * attackerData.moves.length)]
@@ -87,12 +104,13 @@ async function performAllyAttack(attackerName, defenderName) {
     );
 
     // Update defender's HP (decrease by 20%)
-    const defenderHP = document.querySelector(
-      `.img-container.${randomDefenderClass} .hp`
-    );
-    let currentHP = parseInt(defenderHP.innerText.replace("%", ""));
     currentHP = Math.max(currentHP - 20, 0); // Decrease HP by 20%
     defenderHP.innerText = `${currentHP}%`;
+
+    // Check if defender's HP is 0% and display defeat prompt if so
+    if (currentHP === 0) {
+      alert(`${randomDefenderData.name} was defeated!`);
+    }
   } catch (error) {
     console.error("Error fetching data:", error);
   }
