@@ -46,7 +46,7 @@ h1 {
 .saved-pokemon-container .pokemon {
   margin-bottom: 10px; /* Add margin between saved pokemon cards */
   width: 200px;
-  height: 250px;
+  height: 300px;
 }
 
 .pokemon {
