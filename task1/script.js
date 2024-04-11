@@ -378,6 +378,26 @@ document.addEventListener("DOMContentLoaded", async function () {
       const nameElement = document.createElement("h2");
       nameElement.textContent = `Name: ${pokemon.name}`;
 
+      //added type and background to the saved Pokemon
+      const typeNames = pokemon.types.map((type) => type.type.name);
+      const backgroundColor = getTypeColor(typeNames[0]);
+
+      // Apply background color based on type
+      savedPokemonCard.style.backgroundColor = backgroundColor;
+
+      // Create type buttons for all types
+      typeNames.forEach((typeName) => {
+        const typeButton = document.createElement("button");
+        typeButton.classList.add("type-btn");
+        typeButton.textContent =
+          typeName.charAt(0).toUpperCase() + typeName.slice(1);
+        typeButton.style.backgroundColor = getTypeColor(typeName);
+        typeButton.addEventListener("click", () => {
+          filterPokemonByType(typeName);
+        });
+        savedPokemonCard.appendChild(typeButton);
+      });
+
       // Create action buttons for saved Pokemon
       const actionButtons = document.createElement("div");
       actionButtons.classList.add("action-buttons");
