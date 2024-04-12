@@ -298,7 +298,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
 
-  function savePokemon(pokemon, type, backgroundColor) {
+  function savePokemon(pokemon) {
     if (savedPokemonList.length < 5) {
       savedPokemonList.push(pokemon);
       showSavedPokemon();
