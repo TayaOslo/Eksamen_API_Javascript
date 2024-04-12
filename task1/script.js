@@ -28,8 +28,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     fairy: "#D685AD",
   };
 
-  let allPokemonList = []; // Store all fetched Pokemon data
-  let savedPokemonList = []; // Store saved Pokemon
+  let allPokemonList = [];
+  let savedPokemonList = [];
 
   async function fetchPokemonList() {
     const response = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=50");
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   function showAllPokemon(pokemonList) {
-    pokemonContainer.innerHTML = ""; // Clear existing Pokemon
+    pokemonContainer.innerHTML = "";
     pokemonList.forEach((pokemon) => {
       showPokemon(pokemon);
     });
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     deleteButton.classList.add("btn", "delete-btn");
     deleteButton.addEventListener("click", () => {
       deletePokemon(pokemon, allPokemonList);
-      pokemonContainer.removeChild(pokemonCard); // Remove the deleted Pokemon card from the container
+      pokemonContainer.removeChild(pokemonCard);
     });
 
     const editButton = document.createElement("button");
@@ -127,13 +127,13 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     pokemonCard.appendChild(imageElement);
     pokemonCard.appendChild(nameElement);
-    pokemonCard.appendChild(actionButtons); // Append action buttons to the Pokémon card
+    pokemonCard.appendChild(actionButtons);
 
     pokemonContainer.appendChild(pokemonCard);
   }
 
   function getTypeColor(type) {
-    return typeColors[type] || "#999"; // Default color if type not found
+    return typeColors[type] || "#999";
   }
 
   // Create buttons for each type
@@ -163,8 +163,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     const type = document.getElementById("pokemon-type").value.trim();
     if (name && type) {
       try {
-        const newPokemon = { name, types: [{ type: { name } }] }; // Create a new Pokemon object with user input
-        showPokemonForm(newPokemon, type); // Pass the type name to the showPokemonForm function
+        const newPokemon = { name, types: [{ type: { name } }] };
+        showPokemonForm(newPokemon, type);
       } catch (error) {
         console.error("Error creating Pokémon", error);
       }
@@ -173,10 +173,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   });
 
-  let newPokemon; // Define newPokemon at a higher scope
+  let newPokemon;
 
   async function showPokemonForm(pokemon, type) {
-    newPokemon = pokemon; // Assign the pokemon to newPokemon
+    newPokemon = pokemon;
 
     const pokemonCard = document.createElement("div");
     pokemonCard.classList.add("pokemon");
@@ -188,10 +188,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     const nameElement = document.createElement("h2");
     nameElement.textContent = `Name: ${pokemon.name}`;
 
-    let typeButton; // Define typeButton variable outside of the event listener
+    let typeButton;
 
     try {
-      // Fetch the type details from the API using the typeName entered by the user
       const typeResponse = await fetch(
         `https://pokeapi.co/api/v2/type/${type}`
       );
@@ -200,15 +199,14 @@ document.addEventListener("DOMContentLoaded", async function () {
         throw new Error("Failed to fetch Pokémon type.");
       }
       const typeData = await typeResponse.json();
-      const typeName = typeData.name; // Extract the type name from the response
+      const typeName = typeData.name;
 
-      // Determine background color based on the type name
       const backgroundColor = getTypeColor(typeName);
 
       pokemonCard.style.backgroundColor = backgroundColor;
 
       // Create and append type button
-      typeButton = document.createElement("button"); // Assign typeButton here
+      typeButton = document.createElement("button");
       typeButton.classList.add("type-btn");
       typeButton.textContent =
         typeName.charAt(0).toUpperCase() + typeName.slice(1);
@@ -219,12 +217,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       pokemonCard.appendChild(typeButton);
     } catch (error) {
       console.error("Error fetching Pokémon type:", error);
-      // Handle errors gracefully
-      // If there's an error fetching the type, create a default type button
+
       typeButton = document.createElement("button");
       typeButton.classList.add("type-btn");
       typeButton.textContent = "Unknown Type";
-      typeButton.style.backgroundColor = "#999"; // Default color
+      typeButton.style.backgroundColor = "#999";
       pokemonCard.appendChild(typeButton);
     }
 
@@ -244,7 +241,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     deleteButton.classList.add("btn", "delete-btn");
     deleteButton.addEventListener("click", () => {
       deletePokemon(newPokemon, allPokemonList);
-      pokemonContainer.removeChild(pokemonCard); // Remove the deleted Pokemon card from the container
+      pokemonContainer.removeChild(pokemonCard);
     });
 
     const editButton = document.createElement("button");
@@ -282,9 +279,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     pokemonCard.appendChild(imageElement);
     pokemonCard.appendChild(nameElement);
-    pokemonCard.appendChild(actionButtons); // Append action buttons to the Pokémon card
+    pokemonCard.appendChild(actionButtons);
 
-    pokemonContainer.insertBefore(pokemonCard, pokemonContainer.firstChild); // Insert the new card at the beginning of the container
+    pokemonContainer.insertBefore(pokemonCard, pokemonContainer.firstChild);
   }
 
   function filterPokemonByType(type) {
@@ -338,7 +335,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     if (newName !== null && newName.trim() !== "") {
       pokemon.name = newName.trim();
-      pokemon.types[0].type.name = newType.trim(); // Update the type of the Pokemon
+      pokemon.types[0].type.name = newType.trim();
 
       // Update the type button in the Pokemon card
       const typeButton = pokemonContainer.querySelector(".type-btn");
@@ -362,7 +359,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   function showSavedPokemon() {
-    savedPokemonContainer.innerHTML = ""; // Clear existing saved Pokémon display
+    savedPokemonContainer.innerHTML = "";
     savedPokemonList.forEach((pokemon) => {
       const savedPokemonCard = document.createElement("div");
       savedPokemonCard.classList.add("pokemon");
@@ -372,7 +369,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         imageElement.src = pokemon.sprites.front_default;
         imageElement.alt = pokemon.name;
       } else {
-        imageElement.src = "assets/pokemon.webp"; // Default image source
+        imageElement.src = "assets/pokemon.webp";
         imageElement.alt = "Default Pokemon";
       }
 
@@ -415,7 +412,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       savedPokemonCard.appendChild(imageElement);
       savedPokemonCard.appendChild(nameElement);
-      savedPokemonCard.appendChild(actionButtons); // Append action buttons to the saved Pokémon card
+      savedPokemonCard.appendChild(actionButtons);
 
       savedPokemonContainer.appendChild(savedPokemonCard);
     });
