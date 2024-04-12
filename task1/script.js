@@ -195,6 +195,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       const typeResponse = await fetch(
         `https://pokeapi.co/api/v2/type/${type}`
       );
+
       if (!typeResponse.ok) {
         throw new Error("Failed to fetch Pokémon type.");
       }
@@ -297,7 +298,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
 
-  function savePokemon(pokemon) {
+  function savePokemon(pokemon, type, backgroundColor) {
     if (savedPokemonList.length < 5) {
       savedPokemonList.push(pokemon);
       showSavedPokemon();
